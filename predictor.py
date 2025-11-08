@@ -8,6 +8,7 @@ from sklearn.preprocessing import StandardScaler
 from tensorflow.keras.models import Sequential  #type: ignore
 from tensorflow.keras.layers import Dense, Input #type: ignore
 from tensorflow.keras.initializers import GlorotUniform #type: ignore
+from tensorflow.keras.callbacks import EarlyStopping #type: ignore
 
 def entrenar_modelo(df_notas, df_alumno_materia):
     """
@@ -45,9 +46,13 @@ def entrenar_modelo(df_notas, df_alumno_materia):
 
     model.compile(optimizer="adam", loss="mean_squared_error")
 
+    early_stop = EarlyStopping(
+        monitor='loss', patience=20, restore_best_weights=True
+    )
+
     # 7. Entrenamos el modelo con el target escalado y_train_scaled
     # Aumentamos epochs para un mejor ajuste con pocos datos
-    model.fit(X_train, y_train_scaled, epochs=1000, batch_size=4, verbose=0)
+    model.fit(X_train, y_train_scaled, epochs=200, batch_size=16, verbose=0, callbacks=[early_stop])
 
     # 8. Devolvemos el modelo y el scaler
     return model, scaler

@@ -1,6 +1,8 @@
 import pandas as pd
 import os
 import sys
+import subprocess
+import random as rnd
 
 
 def Create_Dataset(nombre, columnas):
@@ -34,7 +36,7 @@ def CrearDatosPrincipio():
     """
     Agrega datos iniciales a los datasets para pruebas.
     """
-        # Alumnos
+    # Alumnos
     Save_Data("alumnos.csv", {'legajo': 1001, 'nombre': 'Juan Pérez', 'edad': 22, 'genero': 'M'})
     Save_Data("alumnos.csv", {'legajo': 1002, 'nombre': 'Ana Gómez', 'edad': 21, 'genero': 'F'})
     Save_Data("alumnos.csv", {'legajo': 1003, 'nombre': 'Facundo López', 'edad': 20, 'genero': 'M'})
@@ -49,29 +51,23 @@ def CrearDatosPrincipio():
 
 
     # Relación alumno–materia (asistencia y horas semanales)
-    Save_Data("alumno_materia.csv", {'legajo': 1001, 'id_materia': 1, 'asistencia': 90, 'horas_semanales': 10})
-    Save_Data("alumno_materia.csv", {'legajo': 1001, 'id_materia': 2, 'asistencia': 85, 'horas_semanales': 8})
-    Save_Data("alumno_materia.csv", {'legajo': 1002, 'id_materia': 1, 'asistencia': 95, 'horas_semanales': 12})
-    Save_Data("alumno_materia.csv", {'legajo': 1002, 'id_materia': 3, 'asistencia': 88, 'horas_semanales': 9})
-    Save_Data("alumno_materia.csv", {'legajo': 1003, 'id_materia': 1, 'asistencia': 80, 'horas_semanales': 6})
-    Save_Data("alumno_materia.csv", {'legajo': 1003, 'id_materia': 4, 'asistencia': 75, 'horas_semanales': 5})
-    Save_Data("alumno_materia.csv", {'legajo': 1004, 'id_materia': 2, 'asistencia': 92, 'horas_semanales': 10})
-    Save_Data("alumno_materia.csv", {'legajo': 1004, 'id_materia': 3, 'asistencia': 85, 'horas_semanales': 7})
-    Save_Data("alumno_materia.csv", {'legajo': 1005, 'id_materia': 3, 'asistencia': 78, 'horas_semanales': 6})
-    Save_Data("alumno_materia.csv", {'legajo': 1005, 'id_materia': 4, 'asistencia': 82, 'horas_semanales': 8})
 
+    for alumno in range(1001, 1006):
+        for materia in range(1, 5):
+            asistencia = rnd.randint(70, 100)
+            horas_semanales = rnd.randint(5, 12)
+            Save_Data("alumno_materia.csv", {'legajo': alumno, 'id_materia': materia, 'asistencia': asistencia, 'horas_semanales': horas_semanales})
+    
 
     # === Agregar notas por alumno y materia ===
-    Save_Data("notas.csv", {'legajo': 1001, 'id_materia': 1, 'nota': 85, 'fecha': '2023-05-10', 'dificultad': 'Media'})
-    Save_Data("notas.csv", {'legajo': 1001, 'id_materia': 2, 'nota': 78, 'fecha': '2023-05-12', 'dificultad': 'Alta'})
-    Save_Data("notas.csv", {'legajo': 1002, 'id_materia': 1, 'nota': 92, 'fecha': '2023-05-11', 'dificultad': 'Media'})
-    Save_Data("notas.csv", {'legajo': 1002, 'id_materia': 3, 'nota': 88, 'fecha': '2023-05-13', 'dificultad': 'Baja'})
-    Save_Data("notas.csv", {'legajo': 1003, 'id_materia': 1, 'nota': 75, 'fecha': '2023-05-10', 'dificultad': 'Media'})
-    Save_Data("notas.csv", {'legajo': 1003, 'id_materia': 4, 'nota': 80, 'fecha': '2023-05-14', 'dificultad': 'Alta'})
-    Save_Data("notas.csv", {'legajo': 1004, 'id_materia': 2, 'nota': 89, 'fecha': '2023-05-12', 'dificultad': 'Alta'})
-    Save_Data("notas.csv", {'legajo': 1004, 'id_materia': 3, 'nota': 84, 'fecha': '2023-05-13', 'dificultad': 'Baja'})
-    Save_Data("notas.csv", {'legajo': 1005, 'id_materia': 3, 'nota': 77, 'fecha': '2023-05-13', 'dificultad': 'Baja'})
-    Save_Data("notas.csv", {'legajo': 1005, 'id_materia': 4, 'nota': 83, 'fecha': '2023-05-14', 'dificultad': 'Alta'})
+
+    for alumno in range(1001, 1006):
+        for materia in range(1, 5):
+            for i in range(1, 10):  # 10 notas por materia
+                nota = rnd.randint(40, 100)
+                fecha = f"2023-{rnd.randint(1, 12)}-{rnd.randint(10, 20)}"
+                dificultad = rnd.choice(['Baja', 'Media', 'Alta'])
+                Save_Data("notas.csv", {'legajo': alumno, 'id_materia': materia, 'nota': nota, 'fecha': fecha, 'dificultad': dificultad})
 
 
 if __name__ == "__main__":      # Redirige la ejecución a main.py si se ejecuta este archivo directamente

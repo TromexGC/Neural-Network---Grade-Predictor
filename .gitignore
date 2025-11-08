@@ -1,0 +1,22 @@
+# Archivos de datos generados por el programa
+alumnos.csv
+materias.csv
+notas.csv
+alumno_materia.csv
+historial_predicciones.csv
+prediccion_resultado.txt
+*.csv
+
+# Entornos virtuales
+venv/
+.venv/
+env/
+*.pyc
+
+# Archivos de macOS/Windows
+.DS_Store
+
+# Directorios de Keras/TensorFlow
+__pycache__/
+logs/
+.ipynb_checkpoints

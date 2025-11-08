@@ -1,1 +1,3 @@
-Legajo: 1005, Alumno: Martín Ruiz, Materia: Programación, Nota Predicha: 40.40
+Legajo: 1001, Alumno: Juan Pérez, Materia: Programación, Nota Predicha: 71.82
+Legajo: 1003, Alumno: Facundo López, Materia: Matemática, Nota Predicha: 73.05
+Legajo: 1002, Alumno: Ana Gómez, Materia: Física, Nota Predicha: 72.04

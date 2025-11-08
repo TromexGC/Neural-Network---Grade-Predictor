@@ -23,6 +23,7 @@ import datasetMethods as dm
 import ui
 
 try:
+    # Crear datasets si no existen
     dm.Create_Dataset("alumnos.csv", [
         "legajo",
         "nombre",
@@ -45,14 +46,12 @@ try:
         "asistencia",
         "horas_semanales"])
     
+    # Agregar datos iniciales para pruebas
     dm.CrearDatosPrincipio()
     
-    ui.mostrar_menu()
 
-    alumnos_df = pd.read_csv("alumnos.csv")
-    materias_df = pd.read_csv("materias.csv")
-    notas_df = pd.read_csv("notas.csv")
-    alumno_materia_df = pd.read_csv("alumno_materia.csv")
+    # Iniciar la interfaz de usuario
+    ui.mostrar_menu()
 
 except Exception as e:
     print(f"Error: {e}")
